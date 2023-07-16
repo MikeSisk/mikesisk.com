@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Bootstrapping your business with Linux on eMachines (in 1998)</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<p><a href="/index.html">Home</a> : <b>Bootstrapping your business with Linux on eMachines (in 1998)</b></p>
+<p>2023-06-26</p>
+<hr>
+
+<p><img src="/img/bootstrap.jpg" width=500></p>
+
+<p>When I was starting furfly, one of the big questions is what hardware to use for our infrastructure.</p>
+
+<p>Back in 1998 the standard path to standing up internet infrastructure was to purchase Sun Enterprise servers at a cost of hundreds of thousands of dollars.</p>
+
+<p>But for the past few years I’d been playing with this new thing called Linux and I thought putting that on some commodity hardware might be the way.</p> 
+
+<p>So off I went to Micro Center to see what I could get with minimal cash outlay.</p> 
+
+<p>This was in Irvine, California and there was this new company based there that had placed a large stock of these new computers in the store: eMachines.</p> 
+
+<p>I got one and took it home to see what I needed to do to it to get it ready to do some real work.</p> 
+
+<p>First, out with the modem and in went a 3Com Ethernet card. Next I filled it up to the maximum amount of RAM. Then I pulled out the stock smallish hard drive and replaced it with a larger and faster one. I installed Red Hat Linux and got it configured and on the test network in my home office.</p> 
+
+<p>Not bad; performance was good. I let it burn in under load for a few days and went and bought another one. I did the same upgrades to the new one and installed our tech stack on both and did some tests. Performance was good, but our database on the consumer IDE drive was a bit pokey.</p> 
+
+<p>I got another one. This time I put in a SCSI card, a SCSI hard disk and hooked up an external Sun SCSI tape backup unit I had handy. This was much faster. But the additional cost of the SCSI stuff and the added complexity (SCSI cables are huge and need termination) complicated things.</p> 
+
+<p>In the end I decided to forego the SCSI and stuck with the IDE drives. Some tuning of the database server (both Linux tweaks and database configs) got the performance to an acceptable level.</p> 
+
+<p>So I got a few more machines, converted them, and hauled them down to the local Exodus datacenter and hooked up to the net. For the first go I just left them in their eMachine cases hooked up to a Cisco switch and router. It made quite a sight next to the racks of Sun Enterprise hardware.</p>
+
+<p>Eventually we ran out of space at the datacenter and I started replacing the eMachine cases with 2U rack mounts.</p> 
+
+<p>And a few years later, as business grew, I was able to replace all the eMachines with Dell enterprise servers, still running Red Hat Linux. By this point the rest of the world had caught on, Sun has gone under, and Linux is the defacto standard for running your internet tech stack.</p>
+
+</body>
+</html>
