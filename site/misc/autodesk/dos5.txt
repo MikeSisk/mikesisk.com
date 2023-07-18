@@ -19,9 +19,7 @@ memory use.  From the command line of the drawing editor, enter:
 to check the total memory (in Kbytes) above one megabyte that is available
 to AutoCAD(R) (that is, not taken by other programs, including RAM disks
 and disk cache programs).  This will be reported as "Total extended memory:
-
 xxxxK", where xxxx is the total amount of both extended and expanded memory
-
 available to AutoCAD.  If this number is significantly less than the
 combined amount of both extended and expanded memory in your customer's
 system, then use one of the options explained below to enable the use of
@@ -75,11 +73,9 @@ has upgraded to MS-DOS 5.0 should also upgrade his version of AutoCAD to
 Release 11 c2.
 
 IMPORTANT:  Phar Lap 386|DOS-Extender version 2.6 will address XMS or VCPI
-
 memory (regular extended or EMS expanded), but not both at the same time.
 
 If a system is configured for both XMS and VCPI memory, through the use of
-
 HIMEM.SYS and EMM386.EXE respectively, 386|DOS-Extender will use only
 memory from the VCPI memory pool.   Hence, if a small amount of memory is
 mistakenly allocated via EMM386.EXE (the default is only 256k) while the
@@ -89,8 +85,7 @@ run sluggishly for lack of RAM.
 Option 2.  Use the /int15xxxx switch of HIMEM.SYS to exclude an amount of
 memory from XMS compliance.  This will leave xxxx K bytes of memory as
 extended that AutoCAD can use.  Refer to the section on HIMEM.SYS of the
-MS-DOS 5.0 User's Guide and Reference Manual for
-more information.
+MS-DOS 5.0 User's Guide and Reference Manual for more information.
 
 Option 3.  Use HIMEM.SYS and the device driver EMM386.EXE, which will
 only function if HIMEM.SYS is loaded first, to create a specified amount
@@ -104,9 +99,7 @@ CONFIG.SYS file immediately following the line which loads HIMEM.SYS:
      DEVICE=C:\DOS\EMM386.EXE  xxxx  RAM  ON  W=ON
 
 where xxxx is the amount of memory EMM386.EXE will allocate to expanded EMS
-
 in K bytes.  This should be the total amount of RAM in the system minus one
-
 megabyte.  For example, in a system with 8 megabytes total memory the xxxx
 setting should be 7168. (8192 K total RAM - 1024 K = 7168 K).  The RAM ON
 option enables EMM386 to be VCPI-compliant, enabling AutoCAD 386 to run in
@@ -119,9 +112,7 @@ Microsoft MS-DOS 5.0 User's Guide for more information on EMM386.EXE
 Option 4.  Remove HIMEM.SYS from the CONFIG.SYS file.  This will allow
 AutoCAD right-out-of-the-box to run with a minimum of work.  The
 disadvantage here is that one loses some of the advanced features of MS-DOS
-
 5.0, including the ability to load TSR's, device drivers, and MS-DOS itself
-
 into high memory.
 
 QEMM-386TM
@@ -175,7 +166,6 @@ StudioTM, and Autodesk Animator ProTM.
 
      For James Gleick's CHAOS: The SoftwareTM, the METASHEL program should
 be loaded into memory using the MS-DOS command LOADFIX.  The easiest way to
-
 do this is to edit the file CHAOS.BAT with MS-DOS 5.0's EDIT program.  The
 sixth line in the file is "metashel /i".  This line should be changed to
 "LOADFIX metashel /i".  See the Microsoft MS-DOS 5.0 User's Guide for
