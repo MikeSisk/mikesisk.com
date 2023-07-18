@@ -1,0 +1,235 @@
+
+Product Support                                             July 18, 1991
+
+        Microsoft's MS-DOS(R) version 5.0 and Autodesk Products
+
+     Microsoft's recent release of the Disk Operating System 5.0 (MS-DOS
+5.0) update offers several significant advantages for Autodesk customers.
+MS-DOS 5.0 contains advanced memory management tools and an assortment of
+useful DOS utilities.  All Autodesk products work properly with MS-DOS 5.0
+when correctly configured, as explained below.
+
+Status Command
+
+     In AutoCAD 386TM, the Status command gives a complete listing of
+memory use.  From the command line of the drawing editor, enter:
+
+     status
+
+to check the total memory (in Kbytes) above one megabyte that is available
+to AutoCAD(R) (that is, not taken by other programs, including RAM disks
+and disk cache programs).  This will be reported as "Total extended memory:
+
+xxxxK", where xxxx is the total amount of both extended and expanded memory
+
+available to AutoCAD.  If this number is significantly less than the
+combined amount of both extended and expanded memory in your customer's
+system, then use one of the options explained below to enable the use of
+more system memory.
+
+     For a complete discussion of the Status command, refer to Chapter 3 of
+the AutoCAD Reference Manual, and to Chapter 4 of the Installation and
+Performance Guide.
+
+HIMEM.SYS
+
+     Understanding HIMEM.SYS, the eXtended Memory Specification (XMS)
+manager shipped with MS-DOS 5.0, is the key to proper system configuration.
+
+     Many of the advanced features of MS-DOS 5.0, such as the ability to
+"highload" MS-DOS, use RAM disks, and use Microsoft's EMM386 expanded
+memory specification (EMS) manager require HIMEM.SYS to be installed.  The
+default installation of MS-DOS 5.0 will include HIMEM.SYS in your
+customer's CONFIG.SYS file with the following line:
+
+     DEVICE=C:\DOS\HIMEM.SYS
+
+AutoCAD 386
+
+     AutoCAD 386 is linked using Phar Lap's 386|DOS-ExtenderTM version 2.2d
+for memory management.  The 386|DOS-Extender version 2.2d complies with the
+Virtual Control Program Interface (VCPI) and therefore does not access the
+XMS memory that HIMEM.SYS creates by default.
+
+     There are four basic configuration choices that will allow AutoCAD 386
+(Releases 10 and 11) to function properly with MS-DOS 5.0.  They are, in
+recommended order:
+
+Option 1.  Use NEWDX to update the Phar Lap 386|DOS-Extender in AutoCAD 386
+
+from version 2.2d to 2.6.  This will allow AutoCAD to use XMS memory as
+well as provide important additional features, discussed in the section
+DOS-Extender 2.6, below.
+
+     NEWDX.EXE will update the Phar Lap 386|DOS-Extender from version 2.2d
+to version 2.6.  This executable file is included in every package of
+AutoCAD 386 Release 11 c2 on the disk labeled "Dxfix / Newdx / B1-step
+Disk".  NEWDX is also available on the Autodesk Forum on CompuServe in Data
+
+Library 10 (Utilities / ADI) in compressed format as NEWDX.ZIP.  Once
+updated to version 2.6, the DOS-Extender, in addition to providing other
+features, allows AutoCAD 386 to use the XMS memory managed by HIMEM.SYS.
+Complete installation instructions and a summary of the other new features
+of the new DOS-Extender are included with NEWDX.  Note that a customer who
+has upgraded to MS-DOS 5.0 should also upgrade his version of AutoCAD to
+Release 11 c2.
+
+IMPORTANT:  Phar Lap 386|DOS-Extender version 2.6 will address XMS or VCPI
+
+memory (regular extended or EMS expanded), but not both at the same time.
+
+If a system is configured for both XMS and VCPI memory, through the use of
+
+HIMEM.SYS and EMM386.EXE respectively, 386|DOS-Extender will use only
+memory from the VCPI memory pool.   Hence, if a small amount of memory is
+mistakenly allocated via EMM386.EXE (the default is only 256k) while the
+bulk of memory is allocated as XMS memory, then 386|DOS-Extender 2.6 will
+run sluggishly for lack of RAM.
+
+Option 2.  Use the /int15xxxx switch of HIMEM.SYS to exclude an amount of
+memory from XMS compliance.  This will leave xxxx K bytes of memory as
+extended that AutoCAD can use.  Refer to the section on HIMEM.SYS of the
+MS-DOS 5.0 User's Guide and Reference Manual for
+more information.
+
+Option 3.  Use HIMEM.SYS and the device driver EMM386.EXE, which will
+only function if HIMEM.SYS is loaded first, to create a specified amount
+of expanded EMS memory that AutoCAD can use.  By default the amount of
+memory allocated to the expanded EMS memory pool is 256K. EMM386.EXE
+must be used if you wish to load TSR's and device drivers "high" into
+the upper memory block (UMB) area.  For use with Autodesk products,
+EMM386.EXE should be loaded with the following line in your customer's
+CONFIG.SYS file immediately following the line which loads HIMEM.SYS:
+
+     DEVICE=C:\DOS\EMM386.EXE  xxxx  RAM  ON  W=ON
+
+where xxxx is the amount of memory EMM386.EXE will allocate to expanded EMS
+
+in K bytes.  This should be the total amount of RAM in the system minus one
+
+megabyte.  For example, in a system with 8 megabytes total memory the xxxx
+setting should be 7168. (8192 K total RAM - 1024 K = 7168 K).  The RAM ON
+option enables EMM386 to be VCPI-compliant, enabling AutoCAD 386 to run in
+expanded memory.  Under NO circumstance should the NOEMS switch be
+specified.  This will cause the Phar Lap 386|DOS-Extender to abort and
+issue an error message.  The W=ON switch will enable EMS support for the
+Weitek coprocessor on our products which support this hardware.  See the
+Microsoft MS-DOS 5.0 User's Guide for more information on EMM386.EXE
+
+Option 4.  Remove HIMEM.SYS from the CONFIG.SYS file.  This will allow
+AutoCAD right-out-of-the-box to run with a minimum of work.  The
+disadvantage here is that one loses some of the advanced features of MS-DOS
+
+5.0, including the ability to load TSR's, device drivers, and MS-DOS itself
+
+into high memory.
+
+QEMM-386TM
+
+     Another way to ensure compatibility between Autodesk Products and
+MS-DOS 5.0 is by using Quarterdeck Expanded Memory Manager-386TM (QEMM-386)
+
+version 5.1 or higher. QEMM-386 is a dual-function memory manager that
+replaces both HIMEM.SYS and EMM386.EXE.  It does the job of both drivers by
+
+allocating system memory between extended and expanded dynamically.  See
+the documentation that ships with QEMM-386 for further details.
+
+AutoCAD DOS/286
+
+     For customers running the DOS version of AutoCAD Release 10 or earlier
+
+Releases:
+
+1.  AutoCAD Release 10 c2a or c7  or  Release 9
+     a.  When running on an 80286-based machine, you must remove
+          HIMEM.SYS from the CONFIG.SYS file;
+     b.  When running on an 80386- or 80486-based machine
+          i.  Either remove HIMEM.SYS from the CONFIG.SYS file,  or
+          ii. Use HIMEM.SYS together with EMM386.EXE, as explained
+               previously in Option 3.
+
+2.  AutoCAD Release 10c2
+     a.  You must remove HIMEM.SYS from the CONFIG.SYS file,  or
+     b.  Configure AutoCAD to use regular AutoLISP instead of Extended
+          AutoLISP. Note that on 80386- and 80486-based machines, you
+          can still use EMM386.EXE to create expanded memory for
+          AutoCAD to use.
+
+3.  AutoCAD Release 2.62
+     a.  You must remove HIMEM.SYS from the CONFIG.SYS file,  or
+     b.  Do not load MS-DOS into high memory.  That is, in the
+          CONFIG.SYS file, delete the line:
+
+          DOS=HIGH
+
+     Note that AutoCAD Release 11 for 286, when released, will coexist
+peacefully with HIMEM.SYS.
+
+Other Autodesk Products
+
+     The four options listed above for AutoCAD 386 should also work on all
+of Autodesk's Phar Lap 386|DOS-Extender-based products.  Presently, these
+are AutoShade(R) Version 2 with Autodesk Renderman(R), Autodesk 3D
+StudioTM, and Autodesk Animator ProTM.
+
+     For James Gleick's CHAOS: The SoftwareTM, the METASHEL program should
+be loaded into memory using the MS-DOS command LOADFIX.  The easiest way to
+
+do this is to edit the file CHAOS.BAT with MS-DOS 5.0's EDIT program.  The
+sixth line in the file is "metashel /i".  This line should be changed to
+"LOADFIX metashel /i".  See the Microsoft MS-DOS 5.0 User's Guide for
+information on EDIT and LOADFIX.
+
+     AutoSketch(R) Version 3 is not adversely affected by MS-DOS 5.0.
+AutoSketch can use up to 2 megabytes of expanded EMS memory which can be
+created with EMM386.EXE. See the section on EMM386.EXE in the Microsoft
+User's Guide.
+
+DOS-Extender 2.6
+
+     Some of the benefits of updating the Phar Lap 386|DOS-Extender in
+AutoCAD 386 from version 2.2d to 2.6 include:
+
+     o  A smaller kernel.  DOS-Extender 2.2d has a fixed, conventional
+memory "footprint" of approximately 180K bytes.  However, DOS-Extender 2.6
+requires only 80K, saving about 100K bytes of memory for shelled programs,
+TSR's, etc.
+
+     o  Demand paged loading for AutoCAD.  DOS-Extender 2.2d loads AutoCAD
+entirely into memory, and then frees up blocks when memory is scarce.  A
+new feature of DOS-Extender 2.6 enables code to be loaded into memory on
+demand, as it is needed.  This reduces the load time of AutoCAD 386 by 30
+to 40%.  This feature can be controlled be a DOS-
+Extender switch called -DEMANDLOAD.
+
+     o  Limited WindowsTM 3.0 support.  DOS-Extender version 2.6 will run
+in the DOS Box of Windows 3.0 in both real and standard modes  Since
+AutoCAD is a graphics program, it must be run in the full screen mode of
+the DOS Box.  In standard mode, 386|DOS-Extender gets its memory from XMS
+(extended memory).  To ensure that AutoCAD can access XMS memory when it
+runs in the DOS Box, you will have to use Microsoft's PIF editor to create
+a PIF file which makes XMS memory available to the application program,
+AutoCAD.
+
+     Note that DOS-Extender version 2.6 will not support Windows 3.0 in 386
+enhanced mode.  Autodesk does not presently warrant the suitability of
+Windows 3.0 as an operating environment for AutoCAD 386.
+
+          Autodesk Trademarks
+
+AutoCAD, AutoShade, and AutoSketch are registered in the U.S. Patent and
+Trademark Office by Autodesk, Inc.
+
+AutoCAD 386, Autodesk 3D Studio, Autodesk Animator Pro, and James Gleick's
+CHAOS: The Software are trademarks of Autodesk, Inc.
+
+          Third-Party Trademarks
+
+MS-DOS is a registered trademark and Windows is a trademark of Microsoft
+Corporation.
+
+386|DOS-Extender is a trademark of Phar Lap Software, Inc.
+
+Quarterdeck Expanded Memory Manager-386 and QEMM-386 are trademarks of
+Quarterdeck Office Systems.
